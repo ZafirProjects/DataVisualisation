@@ -1,0 +1,85 @@
+package generate
+
+templ RenderGenerateData(temperatures []float64, current, difference string) {
+	<div class="flex flex-col items-center text-center">
+		<h1 class="text-5xl text-orange-400">Temperature</h1>
+		<div id="visualisation">
+			@Data(temperatures, current, difference)
+		</div>
+		<button hx-post="/generate/new" hx-target="#visualisation" hx-swap="transition:true" class="my-12 bg-blue-800 rounded p-4 hover:underline underline-offset-4">Generate New Data</button>
+	</div>
+}
+
+templ Data(temperatures []float64, current, difference string) {
+	@Stats(current, difference)
+	<div id="container"></div>
+	@D3Chart(temperatures)
+}
+
+templ Stats(current, difference string) {
+	<div class="flex flex-row my-10 pl-16">
+		<div class="px-12 items-center flex-auto">
+			<p class="text-teal-400">
+				Current Temperature
+			</p>
+			{ current }°C
+		</div>
+		<div class="px-12 items-center flex-auto">
+			<p class="text-teal-400">
+				Total Temperature Difference
+			</p>
+			{ difference }°C
+		</div>
+	</div>
+}
+
+script D3Chart(temperatures []float64) {
+    // Declare the chart dimensions and margins.
+    const width = 640;
+    const height = 400;
+    const marginTop = 20;
+    const marginRight = 20;
+    const marginBottom = 30;
+    const marginLeft = 40;
+
+    // Declare the x (horizontal position) scale.
+    const x = d3.scaleLinear()
+	.domain([0, temperatures.length])
+	.range([marginLeft, width - marginRight]);
+
+    // Declare the y (vertical position) scale.
+    const y = d3.scaleLinear()
+	.domain([d3.min(temperatures), d3.max(temperatures)])
+	.range([height - marginBottom, marginTop]);
+
+    // Create the SVG container.
+    const svg = d3.create("svg")
+	.attr("width", width)
+	.attr("height", height);
+
+    // Add the x-axis.
+    svg.append("g")
+	.attr("transform", `translate(0,${height - marginBottom})`)
+	.call(d3.axisBottom(x));
+
+    // Add the y-axis.
+    svg.append("g")
+	.attr("transform", `translate(${marginLeft},0)`)
+	.call(d3.axisLeft(y));
+
+    // line generator
+        var line = d3.line()
+        .x(function(d,i) { return x(i); }) 
+        .y(function(d) { return y(d); }) 
+        .curve(d3.curveMonotoneX)
+        
+        svg.append("path")
+        .datum(temperatures) 
+        .attr("d", line(temperatures))
+        .style("fill", "none")
+        .style("stroke", "steelblue")
+        .style("stroke-width", "2");
+
+    // Append the SVG element.
+    container.append(svg.node());
+}
