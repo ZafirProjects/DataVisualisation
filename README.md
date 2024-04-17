@@ -19,8 +19,7 @@ To run the project
 go run cmd/main.go
 ```
 
-The project should run on port 3000<br>
-To see all routes, check /server/routes.go
+The project should run on port 3000 and you can see all routes in the /server/routes.go file.
 
 commands that may help if something doesn't work
 ```bash
