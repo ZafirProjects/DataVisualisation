@@ -10,7 +10,9 @@ import "context"
 import "io"
 import "bytes"
 
-func RenderGenerateData(temperatures []float64, current, difference string) templ.Component {
+import "github.com/ZafirProjects/QuodOrbisChallenge/model"
+
+func RenderGenerateData(data model.TemperatureData) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -27,7 +29,7 @@ func RenderGenerateData(temperatures []float64, current, difference string) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = Data(temperatures, current, difference).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Data(data).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -42,7 +44,7 @@ func RenderGenerateData(temperatures []float64, current, difference string) temp
 	})
 }
 
-func Data(temperatures []float64, current, difference string) templ.Component {
+func Data(data model.TemperatureData) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -55,7 +57,7 @@ func Data(temperatures []float64, current, difference string) templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = Stats(current, difference).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Stats(data.Stats).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -63,7 +65,7 @@ func Data(temperatures []float64, current, difference string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = D3Chart(temperatures).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = D3Chart(data.Temperatures).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -74,7 +76,7 @@ func Data(temperatures []float64, current, difference string) templ.Component {
 	})
 }
 
-func Stats(current, difference string) templ.Component {
+func Stats(stats model.Stats) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -92,9 +94,9 @@ func Stats(current, difference string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(current)
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(stats.Current)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/generate/generateData.templ`, Line: 25, Col: 12}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/generate/generateData.templ`, Line: 27, Col: 18}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -105,9 +107,9 @@ func Stats(current, difference string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(difference)
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(stats.Change)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/generate/generateData.templ`, Line: 31, Col: 15}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/generate/generateData.templ`, Line: 33, Col: 17}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {

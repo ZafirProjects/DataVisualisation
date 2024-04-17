@@ -18,5 +18,6 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	testHandler := handler.TestHandler{}
 	mux.HandleFunc("GET /test", testHandler.HandleTestShow)
+
 	return mux
 }
