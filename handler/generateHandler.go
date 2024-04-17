@@ -40,6 +40,7 @@ func generateTemperatureData(length int, trendStrength float64, noiseStrength fl
 
 	// Generate the time series
 	for i := 1; i < length; i++ {
+		// the i-1 is the previous data point hence relative
 		temperature := series[i-1] + trend[i] + noise[i]
 		temperature = math.Round(temperature*10) / 10
 		series = append(series, temperature)
