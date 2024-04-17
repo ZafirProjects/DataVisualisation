@@ -23,7 +23,5 @@ To run the project
 go run cmd/main.go
 ```
 
-The project should run on port 3000
-there are only two paths
-/
-/test
+The project should run on port 3000<br>
+To see all routes, check /server/routes.go
