@@ -10,27 +10,19 @@ import (
 	"github.com/ZafirProjects/QuodOrbisChallenge/view/generate"
 )
 
-var data = model.TemperatureData{
-	Temperatures: make([]float64, 0),
-	Stats: model.Stats{
-		Current: "",
-		Change:  "",
-	},
-}
-
 type GenerateHandler struct{}
 
 func (h *GenerateHandler) RenderGeneratedData(w http.ResponseWriter, r *http.Request) {
-	generateTemperatureData(100, 0.4, 0.4)
+	data := generateTemperatureData(100, 0.4, 0.4)
 	render(w, r, generate.RenderGenerateData(data))
 }
 
 func (h *GenerateHandler) RenderNewData(w http.ResponseWriter, r *http.Request) {
-	generateTemperatureData(100, 0.4, 0.4)
+	data := generateTemperatureData(100, 0.4, 0.4)
 	render(w, r, generate.Data(data))
 }
 
-func generateTemperatureData(length int, trendStrength float64, noiseStrength float64) {
+func generateTemperatureData(length int, trendStrength float64, noiseStrength float64) model.TemperatureData {
 	// Initialize the time series with a random starting point
 	series := []float64{math.Round((rand.Float64()+20)*10) / 10}
 
@@ -53,9 +45,14 @@ func generateTemperatureData(length int, trendStrength float64, noiseStrength fl
 		series = append(series, temperature)
 	}
 
-	data.Temperatures = series
-	data.Stats.Current = strconv.FormatFloat(series[len(series)-1], 'f', -1, 64)
 	changeFloat := series[len(series)-1] - series[0]
 	changeFloat = math.Round(changeFloat*10) / 10
-	data.Stats.Change = strconv.FormatFloat(changeFloat, 'f', -1, 64)
+
+	return model.TemperatureData{
+		Temperatures: series,
+		Stats: model.Stats{
+			Current: strconv.FormatFloat(series[len(series)-1], 'f', -1, 64),
+			Change:  strconv.FormatFloat(changeFloat, 'f', -1, 64),
+		},
+	}
 }
