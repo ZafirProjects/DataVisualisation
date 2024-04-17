@@ -10,6 +10,9 @@ git clone https://github.com/ZafirProjects/QuodOrbisChallenge.git
 ```
 
 cd into the repository
+```bash
+cd QuodOrbisChallenge
+```
 
 optional
 ```bash
