@@ -14,13 +14,6 @@ cd into the repository
 cd QuodOrbisChallenge
 ```
 
-optionally run (not necessary but may help with debugging)
-```bash
-go install github.com/a-h/templ/cmd/templ@latest
-go get github.com/a-h/templ
-go mod tidy
-```
-
 To run the project
 ```bash
 go run cmd/main.go
@@ -28,3 +21,10 @@ go run cmd/main.go
 
 The project should run on port 3000<br>
 To see all routes, check /server/routes.go
+
+commands that may help if something doesn't work
+```bash
+go install github.com/a-h/templ/cmd/templ@latest
+go get github.com/a-h/templ
+go mod tidy
+```
