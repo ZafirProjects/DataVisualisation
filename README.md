@@ -27,3 +27,5 @@ go install github.com/a-h/templ/cmd/templ@latest
 go get github.com/a-h/templ
 go mod tidy
 ```
+
+One possible improvement I could have made is my data generation algorithm, as well as the way I passed that data to the view.
