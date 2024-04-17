@@ -31,7 +31,7 @@ func RenderWelcomePage() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<main class=\"flex-1\"><section class=\"w-full h-screen max-h-screen items-center py-10 md:py-20 lg:py-28 xl:py-40\"><div class=\"flex flex-col items-center text-center max-w-prose m-auto\"><h1 class=\"text-5xl text-orange-400 p-8\">Temperature Data Visualiser</h1><p class=\"text-pretty\">This web app visualises tempurature data. The Go backend produces data for every hour in a 48 hour period. The data is then visualised using d3 js. Click the button to generate temperature data and visualise it.</p><button hx-post=\"/generate\" hx-target=\"section\" hx-swap=\"transition:true\" class=\"my-12 bg-blue-800 rounded p-4 hover:underline underline-offset-4\">Generate</button></div></section></main>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<main class=\"flex-1\"><section class=\"w-full h-screen max-h-screen items-center py-10 md:py-20 lg:py-28 xl:py-40\"><div class=\"flex flex-col items-center text-center max-w-prose m-auto\"><h1 class=\"text-5xl text-orange-400 p-8\">Temperature Data Visualiser</h1><p class=\"text-pretty\">This web app visualises tempurature data.<br>The Go backend produces 100 datapoints which is generated upon request to the API. The data is then visualised using d3 js.<br>Click the button to generate temperature data and visualise it.</p><button hx-post=\"/generate\" hx-target=\"section\" hx-swap=\"transition:true\" class=\"my-12 bg-blue-800 rounded p-4 hover:underline underline-offset-4\">Generate</button></div></section></main>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
