@@ -14,7 +14,7 @@ cd into the repository
 cd QuodOrbisChallenge
 ```
 
-optional
+optionally run (may help with debugging)
 ```bash
 go install github.com/a-h/templ/cmd/templ@latest
 go get github.com/a-h/templ
