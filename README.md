@@ -5,7 +5,7 @@ download and install go 1.22 or higher
 This project uses [templ](templ.guide)
 
 ```bash
-https://github.com/ZafirProjects/DataVisualisation.git
+git clone https://github.com/ZafirProjects/DataVisualisation.git
 cd DataVisualisation
 go run cmd/main.go
 ```
