@@ -1,24 +1,12 @@
-# QuodOrbisChallenge
-
-Solution to Quod Orbis Technical Challenge
+# Data Visualisation using GO and HTMX
 
 download and install go 1.22 or higher
 
-This project uses [templ](templ.guide) as a depenendency because it [allows go data to be passed to scripts](https://templ.guide/syntax-and-usage/script-templates#script-templates).
+This project uses [templ](templ.guide)
 
 ```bash
-git clone https://github.com/ZafirProjects/QuodOrbisChallenge.git
-```
-
-cd into the repository
-
-```bash
-cd QuodOrbisChallenge
-```
-
-To run the project
-
-```bash
+https://github.com/ZafirProjects/DataVisualisation.git
+cd DataVisualisation
 go run cmd/main.go
 ```
 
